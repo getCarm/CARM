@@ -1,5 +1,5 @@
 {
-  "manifest_version": 1,
+  "manifest_version": 2,
   "name": "CARM",
   "version": "1",
   "description": "Communicate Among Random Masses",
@@ -10,13 +10,5 @@
   },
   "permissions": [
     "activeTab"
-  ],
-
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["contentscript.js"],
-      "run_at": "document_end"
-    }
   ]
 }
