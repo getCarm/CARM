@@ -1,22 +1,9 @@
-/*document.body.innerHTML = document.body.innerHTML.replace(new RegExp("Nishank", "g"), "-N");*/
+chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
 
+     // since only one tab should be active and in the current window at once
+     // the return variable should only have one entry
+    var activeTab = arrayOfTabs[0];
+    console.log(activeTab.url);
+    alert(activeTab.url);
 
-jQuery.fn.textWalk = function( fn ) {
-    this.contents().each( jwalk );
-
-    function jwalk() {
-        var nn = this.nodeName.toLowerCase();
-        if( nn === '#text') {
-            fn.call( this );
-        } else if( this.nodeType === 1 && this.childNodes && this.childNodes[0] && nn !== 'script' && nn !== 'textarea' ) {
-            $(this).contents().each( jwalk );
-        }
-    }
-    return this;
-};
-
-$('body').textWalk(function() {
-    this.data = this.data.replace('Nishank Kuppa', '-N');
-    this.data = this.data.replace('Nishank', '-N');
-    this.data = this.data.replace('n', 'N');
 });

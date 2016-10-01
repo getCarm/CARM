@@ -5,7 +5,7 @@
   "description": "Communicate Among Random Masses",
 
   "permissions": [
-    "tabs", "http://*/*"
+    "activeTab"
   ],
 
   "content_scripts": [
