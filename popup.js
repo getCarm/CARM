@@ -4,6 +4,7 @@ var host = 'broker.hivemq.com'
 var port = 8000
 
 document.addEventListener('DOMContentLoaded', function() {
+  renderStatus('Please pick a username')
   chooseUsername(function(username) {
     renderStatus('Connecting')
     connect(username)

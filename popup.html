@@ -6,6 +6,7 @@
  -->
 <html>
   <head>
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
     <title>CARM</title>
     <style>
       body {
@@ -21,19 +22,17 @@
         min-height: 300px;
       }
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
-     <script src="mqttws31.min.js"></script>
+    <script src="jquery-3.1.1.js"></script>
+    <script src="materialize/js/materialize.js"></script>
+    <script src="mqttws31.min.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>
     <div id="status"></div>
-    <img id="image-result" hidden>
+    <div class="input-field">
+      <input id="username" type="text">
+      <label for="username">Username</label>
+    </div>
   </body>
 </html>
 
