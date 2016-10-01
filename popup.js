@@ -6,6 +6,7 @@
 
 // called when the client connects
 var url = '' //Global URL variable
+var username = ''
 function onConnect() {
   // Once a connection has been made, make a subscription and send a message.
   console.log('onConnect');
@@ -13,12 +14,8 @@ function onConnect() {
     url = u
     client.subscribe(url)
     console.log('Subscribed to: ' + url)
+    sendUserConnectedMessage()
   })
-
-  // client.subscribe("/World");
-  // message = new Paho.MQTT.Message("Hello");
-  // message.destinationName = "/World";
-  // client.send(message);
 }
 
 // called when the client loses its connection
@@ -26,17 +23,34 @@ function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log('onConnectionLost: '+ responseObject.errorMessage);
   }
+  connect()
 }
 
 // called when a message arrives
-function onMessageArrived(message) {
-  console.log('onMessageArrived: ' + message.payloadString);
+function onMessageArrived(messageObject) {
+  console.log('onMessageArrived: ' + messageObject.payloadString);
+  var message = messageObject.payloadString
+  var index = message.indexOf('|')
+  if (index != -1) {
+    var senderUsername = message.substring(0, index)
+    var actualMessage = message.substring(index + 1)
+  } else {
+    //just show message which states that the user has connected
+  }
+}
+
+function basicSendMessage(messageText, channel) {
+  var message = new Paho.MQTT.Message(messageText)
+  message.destinationName = channel
+  client.send(message)
 }
 
 function sendMessage(messageText) {
-  var message = new Paho.MQTT.Message(messageText)
-  message.destinationName = url
-  client.send(message)
+  basicSendMessage(username + '|' + messageText, url)
+}
+
+function sendUserConnectedMessage() {
+  basicSendMessage(username + 'has joined', url)
 }
 
 /**
@@ -62,48 +76,50 @@ function getCurrentTabUrl(callback) {
     // "url" properties.
     callback(url);
   });
+}
 
-  // Most methods of the Chrome extension APIs are asynchronous. This means that
-  // you CANNOT do something like this:
-  //
-  // var url;
-  // chrome.tabs.query(queryInfo, function(tabs) {
-  //   url = tabs[0].url;
-  // });
-  // alert(url); // Shows "undefined", because chrome.tabs.query is async.
+function chooseUsername(callback) {
+  var container = document.getElementById('username_container')
+  var form = document.createElement('form')
+  var field = document.createElement('input')
+  var submit = document.createElement('button')
+
+  field.setAttribute('type', 'text');
+  field.setAttribute('name', 'username')
+  field.setAttribute('id', 'username_value')
+
+  submit.setAttribute('type','button');
+  submit.textContent = 'Submit'
+  submit.addEventListener('click', function() {
+    console.log("Submit button clicked")
+    var username = document.getElementById('username_value').value
+    console.log("Username: " + username)
+    form.parentNode.removeChild(submit)
+    form.parentNode.removeChild(form)
+    callback(username)
+  })
+
+  form.appendChild(field)
+
+  document.getElementsByTagName('body')[0].appendChild(form);
+  document.getElementsByTagName('body')[0].appendChild(submit);
 }
 
 function renderStatus(statusText) {
   document.getElementById('status').textContent = statusText;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  client = new Paho.MQTT.Client('broker.hivemq.com', 8000, 'vansh');
+function connect(username) {
+  var randomizedUsername = username + '|' + Math.random().toString()  
+  client = new Paho.MQTT.Client('broker.hivemq.com', 8000, randomizedUsername);
   client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
   client.connect({onSuccess:onConnect});
-  renderStatus('Ayy it\'s lit')
+}
 
-
-  // getCurrentTabUrl(function(url) {
-  //   renderStatus('Performing Google Image search for ' + url);
-
-  //   getImageUrl(url, function(imageUrl, width, height) {
-
-  //     renderStatus('Search term: ' + url + '\n' +
-  //         'Google image search result: ' + imageUrl);
-  //     var imageResult = document.getElementById('image-result');
-  //     // Explicitly set the width/height to minimize the number of reflows. For
-  //     // a single image, this does not matter, but if you're going to embed
-  //     // multiple external images in your page, then the absence of width/height
-  //     // attributes causes the popup to resize multiple times.
-  //     imageResult.width = width;
-  //     imageResult.height = height;
-  //     imageResult.src = imageUrl;
-  //     imageResult.hidden = false;
-
-  //   }, function(errorMessage) {
-  //     renderStatus('Cannot display image. ' + errorMessage);
-  //   });
-  // });
+document.addEventListener('DOMContentLoaded', function() {
+  chooseUsername(function(username) {
+    renderStatus('Connecting')
+    connect(username)
+  })
 });
