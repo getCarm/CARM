@@ -63,7 +63,7 @@ function sendMessage(messageText) {
 }
 
 function sendUserConnectedMessage() {
-  basicSendMessage(username + 'has joined', url)
+  basicSendMessage(username + ' has joined', url)
 }
 
 /**
