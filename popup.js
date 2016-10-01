@@ -51,13 +51,6 @@ function getCurrentTabUrl(callback) {
     // from |queryInfo|), then the "tabs" permission is required to see their
     // "url" properties.
     console.assert(typeof url == 'string', 'tab.url should be a string');
-
-
-    var script = document.createElement('script');
-    script.src = 'mqttws31.min.js';
-    script.type = 'text/javascript';
-    document.getElementsByTagName('head')[0].appendChild(script);
-
     callback(url);
   });
 
@@ -117,7 +110,10 @@ function renderStatus(statusText) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-
+  // var script = document.createElement('script');
+  // script.src = 'mqttws31.min.js';
+  // script.type = 'text/javascript';
+  // document.getElementsByTagName('head')[0].appendChild(script);
   client = new Paho.MQTT.Client("broker.hivemq.com", 1883, "vansh");
 
   // set callback handlers
