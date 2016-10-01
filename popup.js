@@ -1,5 +1,7 @@
 var url = '' //Global URL variable
 var username = ''
+var host = 'broker.hivemq.com'
+var port = 8000
 
 document.addEventListener('DOMContentLoaded', function() {
   chooseUsername(function(username) {
@@ -97,22 +99,20 @@ function getCurrentTabUrl(callback) {
   });
 }
 
-function makeMessageForm ()
-{
-  var parent = document.getElementById('status');
-  var writeMessageForm = document.createElement("form");
+function makeMessageForm () {
+  var writeMessageForm = document.createElement('form');
+  var messageInput = document.createElement('input');
+  var messageSubmit = document.createElement('input');
+
   writeMessageForm.setAttribute('id', 'form');
-  var messageInput = document.createElement("input");
+
   messageInput.setAttribute('type', 'text');
   messageInput.setAttribute('id', 'message');
-  var messageSubmit = document.createElement("input");
+
   messageSubmit.setAttribute('type', 'button');
   messageSubmit.setAttribute('value', 'Submit');
-
   messageSubmit.addEventListener('click', function() {
-    console.log("Submit button clicked");
     var message = document.getElementById('message').value;
-    console.log("The message was: " + message);
     document.getElementById('form').reset();
     sendMessage(message)
     return false;
@@ -125,12 +125,12 @@ function makeMessageForm ()
 }
 
 function connect(u) {
-  username = u
-  var randomizedUsername = username + '|' + Math.random().toString()  
-  client = new Paho.MQTT.Client('broker.hivemq.com', 8000, randomizedUsername);
-  client.onConnectionLost = onConnectionLost;
+  username = u //Set the global variable
+  var randomizedUsername = username + '|' + Math.random().toString() //Randomized to ensure no clashes
+  client = new Paho.MQTT.Client(host, port, randomizedUsername);
+  client.onConnectionLost = onConnectionLost; //Set callbacks
   client.onMessageArrived = onMessageArrived;
-  client.connect({onSuccess:onConnect});
+  client.connect({onSuccess:onConnect}); //Connect
 }
 
 function renderStatus(statusText) {
