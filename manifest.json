@@ -1,0 +1,18 @@
+{
+  "manifest_version": 1,
+  "name": "CARM",
+  "version": "1",
+  "description": "Communicate Among Random Masses",
+
+  "permissions": [
+    "tabs", "http://*/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["jquery.min.js", "contentscript.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
