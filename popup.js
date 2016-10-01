@@ -150,7 +150,8 @@ function makeMessageForm (callback)
   document.getElementsByTagName('body')[0].appendChild(writeMessageForm);
 }
 
-function connect(username) {
+function connect(u) {
+  username = u
   var randomizedUsername = username + '|' + Math.random().toString()  
   client = new Paho.MQTT.Client('broker.hivemq.com', 8000, randomizedUsername);
   client.onConnectionLost = onConnectionLost;
