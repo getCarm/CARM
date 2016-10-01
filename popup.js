@@ -1,6 +1,33 @@
 // Copyright (c) 2014 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+// Create a client instance
+
+// called when the client connects
+function onConnect() {
+  // Once a connection has been made, make a subscription and send a message.
+  console.log("onConnect");
+  client.subscribe("/World");
+  message = new Paho.MQTT.Message("Hello");
+  message.destinationName = "/World";
+  client.send(message);
+  alert("onConnect")
+}
+
+// called when the client loses its connection
+function onConnectionLost(responseObject) {
+  alert(responseObject.errorMessage)
+  if (responseObject.errorCode !== 0) {
+    console.log("onConnectionLost:"+responseObject.errorMessage);
+  }
+}
+
+// called when a message arrives
+function onMessageArrived(message) {
+  alert(message)
+  console.log("onMessageArrived:"+message.payloadString);
+}
 
 /**
  * Get the current URL.
@@ -17,23 +44,19 @@ function getCurrentTabUrl(callback) {
   };
 
   chrome.tabs.query(queryInfo, function(tabs) {
-    // chrome.tabs.query invokes the callback with a list of tabs that match the
-    // query. When the popup is opened, there is certainly a window and at least
-    // one tab, so we can safely assume that |tabs| is a non-empty array.
-    // A window can only have one active tab at a time, so the array consists of
-    // exactly one tab.
     var tab = tabs[0];
-
-    // A tab is a plain object that provides information about the tab.
-    // See https://developer.chrome.com/extensions/tabs#type-Tab
     var url = tab.url;
-    alert(url)
-
     // tab.url is only available if the "activeTab" permission is declared.
     // If you want to see the URL of other tabs (e.g. after removing active:true
     // from |queryInfo|), then the "tabs" permission is required to see their
     // "url" properties.
     console.assert(typeof url == 'string', 'tab.url should be a string');
+
+
+    var script = document.createElement('script');
+    script.src = 'mqttws31.min.js';
+    script.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(script);
 
     callback(url);
   });
@@ -94,6 +117,17 @@ function renderStatus(statusText) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+
+  client = new Paho.MQTT.Client("broker.hivemq.com", 1883, "vansh");
+
+  // set callback handlers
+  client.onConnectionLost = onConnectionLost;
+  client.onMessageArrived = onMessageArrived;
+
+  // connect the client
+  client.connect({onSuccess:onConnect});
+
+
   getCurrentTabUrl(function(url) {
     // Put the image URL in Google search.
     renderStatus('Performing Google Image search for ' + url);

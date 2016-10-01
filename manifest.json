@@ -10,5 +10,9 @@
   },
   "permissions": [
     "activeTab"
-  ]
+  ],
+  "content_scripts": [{
+     "js": ["mqttws31.min.js"],
+     "matches": ["http://*/*", "https://*/*"]
+   }]
 }
