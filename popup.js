@@ -45,19 +45,11 @@ function onConnect() {
   makeMessageForm()
 }
 
-// called when a message arrives
-
 function onMessageArrived(messageObject) {
   console.log('onMessageArrived: ' + messageObject.payloadString);
   var message = messageObject.payloadString
   var index = message.indexOf('|')
-  if (index != -1) {
-    var senderUsername = message.substring(0, index)
-    var actualMessage = message.substring(index + 1)
-    var messageToDisplay = senderUsername + ': ' + actualMessage
-  } else {
-    var messageToDisplay = message
-  }
+  var messageToDisplay = index == -1 ? message : message.substring(0, index) + ": " + message.substring(index + 1)
   var parent = document.getElementById('status');
   var para = document.createElement("p");
   var node = document.createTextNode(messageToDisplay);
@@ -79,7 +71,7 @@ function basicSendMessage(messageText, channel) {
 }
 
 function sendMessage(messageText) {
-  basicSendMessage(username + '|' + messageText, url)
+  basicSendMessage(username + '|' + messageText, url) //Encoding the username of the user into the message
 }
 
 function sendUserConnectedMessage() {
