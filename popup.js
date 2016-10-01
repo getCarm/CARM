@@ -19,13 +19,22 @@ function chooseUsername(callback) {
   field.setAttribute('id', 'username_value')
 
   submit.setAttribute('type','button');
-  submit.textContent = 'Submit'
-  submit.addEventListener('click', function() {
+  submit.textContent = 'Submit';
+
+  field.addEventListener('click', function()
+  {
     var username = document.getElementById('username_value').value
     form.parentNode.removeChild(submit)
     form.parentNode.removeChild(form)
     callback(username)
   })
+
+  // submit.addEventListener('click', function() {
+  //   var username = document.getElementById('username_value').value
+  //   form.parentNode.removeChild(submit)
+  //   form.parentNode.removeChild(form)
+  //   callback(username)
+  // })
 
   form.appendChild(field)
 
