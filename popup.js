@@ -5,8 +5,9 @@
 // Create a client instance
 
 // called when the client connects
-var url = ''; //Global URL variable
 
+var url = '' //Global URL variable
+var username = ''
 function onConnect() {
   // Once a connection has been made, make a subscription and send a message.
   console.log('onConnect');
@@ -14,6 +15,7 @@ function onConnect() {
     url = u;
     client.subscribe(url);
     console.log('Subscribed to: ' + url);
+    sendUserConnectedMessage();
   })
 
   makeMessageForm(function (message)
@@ -27,22 +29,41 @@ function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0) {
     console.log('onConnectionLost: '+ responseObject.errorMessage);
   }
+  connect()
 }
 
 // called when a message arrives
-function onMessageArrived(message) {
-  console.log('onMessageArrived: ' + message.payloadString);
+
+function onMessageArrived(messageObject) {
+  console.log('onMessageArrived: ' + messageObject.payloadString);
+  var message = messageObject.payloadString
+  var index = message.indexOf('|')
+  if (index != -1) {
+    var senderUsername = message.substring(0, index)
+    var actualMessage = message.substring(index + 1)
+    var messageToDisplay = senderUsername + ': ' + actualMessage
+  } else {
+    var messageToDisplay = message
+  }
   var parent = document.getElementById('status');
   var para = document.createElement("p");
-  var node = document.createTextNode(message.payloadString);
+  var node = document.createTextNode(messageToDisplay);
   para.appendChild(node);
   parent.appendChild(para);
 }
 
+function basicSendMessage(messageText, channel) {
+  var message = new Paho.MQTT.Message(messageText)
+  message.destinationName = channel
+  client.send(message)
+}
+
 function sendMessage(messageText) {
-  var message = new Paho.MQTT.Message(messageText);
-  message.destinationName = url;
-  client.send(message);
+  basicSendMessage(username + '|' + messageText, url)
+}
+
+function sendUserConnectedMessage() {
+  basicSendMessage(username + 'has joined', url)
 }
 
 /**
@@ -68,15 +89,33 @@ function getCurrentTabUrl(callback) {
     // "url" properties.
     callback(url);
   });
+}
 
-  // Most methods of the Chrome extension APIs are asynchronous. This means that
-  // you CANNOT do something like this:
-  //
-  // var url;
-  // chrome.tabs.query(queryInfo, function(tabs) {
-  //   url = tabs[0].url;
-  // });
-  // alert(url); // Shows "undefined", because chrome.tabs.query is async.
+function chooseUsername(callback) {
+  var container = document.getElementById('username_container')
+  var form = document.createElement('form')
+  var field = document.createElement('input')
+  var submit = document.createElement('button')
+
+  field.setAttribute('type', 'text');
+  field.setAttribute('name', 'username')
+  field.setAttribute('id', 'username_value')
+
+  submit.setAttribute('type','button');
+  submit.textContent = 'Submit'
+  submit.addEventListener('click', function() {
+    console.log("Submit button clicked")
+    var username = document.getElementById('username_value').value
+    console.log("Username: " + username)
+    form.parentNode.removeChild(submit)
+    form.parentNode.removeChild(form)
+    callback(username)
+  })
+
+  form.appendChild(field)
+
+  document.getElementsByTagName('body')[0].appendChild(form);
+  document.getElementsByTagName('body')[0].appendChild(submit);
 }
 
 function renderStatus(statusText) {
@@ -111,10 +150,17 @@ function makeMessageForm (callback)
   document.getElementsByTagName('body')[0].appendChild(writeMessageForm);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  client = new Paho.MQTT.Client('broker.hivemq.com', 8000, 'sahil');
+function connect(username) {
+  var randomizedUsername = username + '|' + Math.random().toString()  
+  client = new Paho.MQTT.Client('broker.hivemq.com', 8000, randomizedUsername);
   client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
   client.connect({onSuccess:onConnect});
-  renderStatus('Welcome to CRAM - Happy Chatting!');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  chooseUsername(function(username) {
+    renderStatus('Connecting')
+    connect(username)
+  })
 });
