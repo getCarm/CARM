@@ -28,6 +28,8 @@ function chooseUsername(callback) {
 
   form.setAttribute('id', 'form1');
 
+  form.setAttribute('id', 'form1');
+
   field.setAttribute('type', 'text');
   field.setAttribute('id', 'username_value')
   field.setAttribute('autocomplete', 'off')
@@ -50,7 +52,6 @@ function chooseUsername(callback) {
       e.preventDefault();
     }
   }
-
   submit.addEventListener('click', function() {
     sendUserName(callback, form, submit);
     callback(username)
@@ -120,6 +121,13 @@ function getCurrentTabUrl(callback) {
   });
 }
 
+function makeMessage()
+{
+    var message = document.getElementById('message').value;
+    document.getElementById('form').reset();
+    sendMessage(message)
+}
+
 function makeMessageForm () {
   var writeMessageForm = document.createElement('form');
   var messageInput = document.createElement('input');
@@ -132,11 +140,19 @@ function makeMessageForm () {
 
   messageSubmit.setAttribute('type', 'button');
   messageSubmit.setAttribute('value', 'Submit');
+
+  writeMessageForm.onkeypress = function(e)
+  {
+    var key = e.charCode || e.keyCode || 0;
+    if (key == 13)
+    {
+      makeMessage();
+      e.preventDefault();
+    }
+  }
+
   messageSubmit.addEventListener('click', function() {
-    var message = document.getElementById('message').value;
-    document.getElementById('form').reset();
-    sendMessage(message)
-    return false;
+    makeMessage();
   })
   
   writeMessageForm.appendChild(messageInput);
