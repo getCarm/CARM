@@ -66,8 +66,9 @@ function chooseUsername(callback) {
 function onConnect() {
   console.log('Connected');
   getCurrentTabUrl(function(u) {
-    url = u;
-    hashed_url = hash(url).toString()
+    url = u;  
+    hashed_url = url.replace(/[^a-zA-Z0-9]/g, '').toUpperCase()
+    hashed_url = hash(hashed_url).toString()
     console.log(hashed_url)
     client.subscribe(hashed_url);
     //var replacedString = url.replace(/[^a-zA-Z0-9/\//]/g, '').toUpperCase();
@@ -107,7 +108,7 @@ function onMessageArrived(messageObject) {
   // var node = document.createTextNode(messageToDisplay);
   // para.appendChild(node);
   parent.appendChild(para);
-  parent.appendChild(brk);
+  parent.appendChild(brk);2
   if (parent.scrollTop > parent.scrollHeight - parent.clientHeight - 70)
   {
     parent.scrollTop = parent.scrollHeight;
