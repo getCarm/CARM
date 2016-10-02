@@ -1,4 +1,5 @@
 var url = '' //Global URL variable
+var hashed_url = ''
 var username = ''
 var host = 'broker.hivemq.com'
 var port = 8000
@@ -66,11 +67,12 @@ function onConnect() {
   console.log('Connected');
   getCurrentTabUrl(function(u) {
     url = u;
-    console.log(hash(url).toString())
-    client.subscribe(hash(url).toString());
-    //var replacedString = url.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
-    //client.subscribe(replacedString);
-    //console.log('Subscribed to: ' + replacedString);
+    hashed_url = hash(url).toString()
+    console.log(hashed_url)
+    client.subscribe(hashed_url);
+    //var replacedString = url.replace(/[^a-zA-Z0-9/\//]/g, '').toUpperCase();
+    // client.subscribe(url);
+    // console.log('Subscribed to: ' + url);
     renderStatus('Connected', true)
     sendUserConnectedMessage();
   })
@@ -127,11 +129,11 @@ function basicSendMessage(messageText, channel) {
 }
 
 function sendMessage(messageText) {
-  basicSendMessage(username + '|' + messageText, url) //Encoding the username of the user into the message
+  basicSendMessage(username + '|' + messageText, hashed_url) //Encoding the username of the user into the message
 }
 
 function sendUserConnectedMessage() {
-  basicSendMessage(username + ' has joined', url)
+  basicSendMessage(username + ' has joined', hashed_url)
 }
 
 function getCurrentTabUrl(callback) {
@@ -220,8 +222,7 @@ function renderStatus(statusText, isUrl) {
 }
 
 function hash(str) {
-  var hash = 5381,
-      i    = str.length
+  var hash = 5381, i = str.length
 
   while(i)
     hash = (hash * 33) ^ str.charCodeAt(--i)
