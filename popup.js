@@ -66,8 +66,10 @@ function onConnect() {
   console.log('Connected');
   getCurrentTabUrl(function(u) {
     url = u;
-    console.log(hash(url).toString())
-    client.subscribe(hash(url).toString());
+    //console.log(hash(url).toString())
+    //client.subscribe(hash(url).toString());
+    //var replacedString = url.replace(/[^a-zA-Z0-9/\//]/g, '').toUpperCase();
+    client.subscribe(url);
     console.log('Subscribed to: ' + url);
     renderStatus('Connected', true)
     sendUserConnectedMessage();
