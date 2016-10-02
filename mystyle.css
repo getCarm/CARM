@@ -16,7 +16,7 @@ body {
         max-height: 700px;
 }
 
-#next {
+#button_next {
 	margin: 16px;
 	float: right;
 }

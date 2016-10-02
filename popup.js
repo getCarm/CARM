@@ -11,25 +11,32 @@ document.addEventListener('DOMContentLoaded', function() {
   })
 });
 
-function sendUserName(callback, form, submit) {
+function sendUserName(callback, divContainer, submit) {
       var username = document.getElementById('username_value').value
-      form.parentNode.removeChild(submit)
-      form.parentNode.removeChild(form)
+      divContainer.parentNode.removeChild(submit)
+      divContainer.parentNode.removeChild(divContainer)
       callback(username);
 }
 
 function chooseUsername(callback) {
-  var form = document.createElement('form')
+  var divContainer = document.createElement('div')
   var field = document.createElement('input')
   var label = document.createElement('label')
   var submit = document.createElement('a')
   var icon = document.createElement('i')
 
-  form.setAttribute('id', 'form1');
+  divContainer.setAttribute('class', 'input-field col 6')
 
   field.setAttribute('type', 'text');
   field.setAttribute('id', 'username_value')
   field.setAttribute('autocomplete', 'off')
+  field.onkeypress = function(e) {
+    var key = e.charCode || e.keyCode || 0
+    if (key == 13) {
+      sendUserName(callback, divContainer, submit)
+      e.preventDefault()
+    }
+  }
   
   label.setAttribute('for', 'username_value')
   label.textContent = 'Username'
@@ -38,24 +45,16 @@ function chooseUsername(callback) {
   icon.textContent = 'arrow_forward'
   
   submit.setAttribute('class','btn-floating btn-large waves-effect waves-light red');
+  submit.setAttribute('id', 'button_submit')
   submit.appendChild(icon)
-  
-  form.onkeypress = function(e) {
-    var key = e.charCode || e.keyCode || 0;
-    if (key == 13) {
-      sendUserName(callback, form, submit);
-      e.preventDefault();
-    }
-  }
-  
   submit.addEventListener('click', function() {
-    sendUserName(callback, form, submit);
+    sendUserName(callback, divContainer, submit);
   })
 
-  form.appendChild(field)
-  form.appendChild(label)
+  divContainer.appendChild(field)
+  divContainer.appendChild(label)
 
-  document.getElementsByTagName('body')[0].appendChild(form);
+  document.getElementsByTagName('body')[0].appendChild(divContainer);
   document.getElementsByTagName('body')[0].appendChild(submit);
 }
 
@@ -119,40 +118,43 @@ function getCurrentTabUrl(callback) {
 
 function makeMessage() {
     var message = document.getElementById('message').value;
-    document.getElementById('form').reset();
+    document.getElementById('message').value = ''
     sendMessage(message)
 }
 
 function makeMessageForm () {
-  var writeMessageForm = document.createElement('form');
+  var writeMessageDiv = document.createElement('div');
   var messageInput = document.createElement('input');
+  var messageLabel = document.createElement('label')
   var messageSubmit = document.createElement('input');
 
-  writeMessageForm.setAttribute('id', 'form');
+  writeMessageDiv.setAttribute('class', 'input-field col 6');
 
   messageInput.setAttribute('type', 'text');
   messageInput.setAttribute('id', 'message');
   messageInput.setAttribute('autocomplete', 'off')
-
-  messageSubmit.setAttribute('type', 'button');
-  messageSubmit.setAttribute('value', 'Submit');
-
-  writeMessageForm.onkeypress = function(e) {
+  messageInput.onkeypress = function(e) {
     var key = e.charCode || e.keyCode || 0;
     if (key == 13) {
       makeMessage();
       e.preventDefault();
     }
   }
+  
+  messageLabel.setAttribute('for', 'message')
+  messageLabel.textContent = 'Message'
 
+  messageSubmit.setAttribute('type', 'button');
+  messageSubmit.setAttribute('value', 'Submit');
   messageSubmit.addEventListener('click', function() {
     makeMessage();
   })
   
-  writeMessageForm.appendChild(messageInput);
-  writeMessageForm.appendChild(messageSubmit);
+  writeMessageDiv.appendChild(messageInput);
+  writeMessageDiv.appendChild(messageLabel);
 
-  document.getElementsByTagName('body')[0].appendChild(writeMessageForm);
+  document.getElementsByTagName('body')[0].appendChild(writeMessageDiv);
+  document.getElementsByTagName('body')[0].appendChild(messageSubmit);
 }
 
 function connect(u) {
