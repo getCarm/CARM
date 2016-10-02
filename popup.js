@@ -137,6 +137,7 @@ function makeMessageForm () {
 
   messageInput.setAttribute('type', 'text');
   messageInput.setAttribute('id', 'message');
+  messageInput.setAttribute('autocomplete', 'off')
 
   messageSubmit.setAttribute('type', 'button');
   messageSubmit.setAttribute('value', 'Submit');
