@@ -44,7 +44,7 @@ function chooseUsername(callback) {
   icon.setAttribute('class', 'material-icons')
   icon.textContent = 'arrow_forward'
   
-  submit.setAttribute('class','btn-floating btn-small waves-effect waves-light red');
+  submit.setAttribute('class','btn-floating btn-small waves-effect waves-light deep-orange');
   submit.setAttribute('id', 'button_submit')
   submit.appendChild(icon)
   submit.addEventListener('click', function() {
@@ -144,7 +144,6 @@ function makeMessageForm () {
   messageIcon.textContent = 'edit'
 
   messageInput.setAttribute('type', 'text');
-  messageInput.setAttribute('id', 'message');
   messageInput.setAttribute('autocomplete', 'off')
   messageInput.onkeypress = function(e) {
     var key = e.charCode || e.keyCode || 0;
@@ -158,10 +157,11 @@ function makeMessageForm () {
   messageLabel.textContent = 'Send Message...'
 
   icon.setAttribute('class', 'material-icons')
+  icon.setAttribute('id', 'iconAttr');
   icon.textContent = 'send'
 
   
-  messageSubmit.setAttribute('class','btn-floating btn-small waves-effect waves-light red');
+  messageSubmit.setAttribute('class','btn-floating btn-small waves-effect waves-light deep-orange');
   messageSubmit.setAttribute('id', 'message_submit')
   messageSubmit.appendChild(icon)
   messageSubmit.addEventListener('click', function() {
