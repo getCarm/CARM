@@ -66,7 +66,8 @@ function onConnect() {
   console.log('Connected');
   getCurrentTabUrl(function(u) {
     url = u;
-    client.subscribe(url);
+    console.log(hash(url).toString())
+    client.subscribe(hash(url).toString());
     console.log('Subscribed to: ' + url);
     renderStatus('Connected', true)
     sendUserConnectedMessage();
@@ -214,4 +215,17 @@ function renderStatus(statusText, isUrl) {
     document.getElementById('status').innerHTML = statusText + " to " + url + "." + '<br>' + "Happy CARMing :)" + '<br>' ;
   else
     document.getElementById('status').innerHTML = statusText;
+}
+
+function hash(str) {
+  var hash = 5381,
+      i    = str.length
+
+  while(i)
+    hash = (hash * 33) ^ str.charCodeAt(--i)
+
+  /* JavaScript does bitwise operations (like XOR, above) on 32-bit signed
+   * integers. Since we want the results to be always positive, convert the
+   * signed int to an unsigned by doing an unsigned bitshift. */
+  return hash >>> 0;
 }
