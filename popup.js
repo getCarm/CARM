@@ -151,6 +151,8 @@ function makeMessageForm () {
 
   messageInput.setAttribute('type', 'text');
   messageInput.setAttribute('autocomplete', 'off')
+  messageInput.setAttribute('id', 'message');
+
   messageInput.onkeypress = function(e) {
     var key = e.charCode || e.keyCode || 0;
     if (key == 13) {
