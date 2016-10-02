@@ -29,6 +29,13 @@ body {
 	white-space: normal;
 }
 
+#p1
+{
+	word-break: break-all;
+	white-space: normal;
+	text-align: right;
+}
+
 #message_submit
 {
 	position:absolute;

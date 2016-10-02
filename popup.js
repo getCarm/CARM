@@ -83,7 +83,10 @@ function onMessageArrived(messageObject) {
   var messageToDisplay = index == -1 ? message : message.substring(0, index) + ": " + message.substring(index + 1)
   var parent = document.getElementById('status');
   var para = document.createElement("p");
-  para.setAttribute('id', 'p2');
+  if (index!= -1 && message.substring(0, index) == username)
+      para.setAttribute('id', 'p1');
+  else
+      para.setAttribute('id', 'p2');
   var node = document.createTextNode(messageToDisplay);
   para.appendChild(node);
   parent.appendChild(para);
