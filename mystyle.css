@@ -23,29 +23,6 @@ body {
         float: right;
 }
 
-/*#p2
-{
-	word-break: break-all;
-	white-space: normal;
-}
-
-#p2 span
-{
-	background-color: #DEE1E5;
-}
-
-#p1
-{
-	word-break: break-all;
-	white-space: normal;
-	text-align: right;
-}
-
-#p2 span
-{
-	background-color: #FF5722;
-}*/
-
 #message_submit
 {
 	position:absolute;

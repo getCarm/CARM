@@ -66,8 +66,10 @@ function onConnect() {
   console.log('Connected');
   getCurrentTabUrl(function(u) {
     url = u;
-    console.log(hash(url).toString())
-    client.subscribe(hash(url).toString());
+    //console.log(hash(url).toString())
+    //client.subscribe(hash(url).toString());
+    //var replacedString = url.replace(/[^a-zA-Z0-9/\//]/g, '').toUpperCase();
+    client.subscribe(url);
     console.log('Subscribed to: ' + url);
     renderStatus('Connected', true)
     sendUserConnectedMessage();
@@ -103,7 +105,7 @@ function onMessageArrived(messageObject) {
   // var node = document.createTextNode(messageToDisplay);
   // para.appendChild(node);
   parent.appendChild(para);
-  //parent.appendChild(brk);
+  parent.appendChild(brk);
   if (parent.scrollTop > parent.scrollHeight - parent.clientHeight - 70)
   {
     parent.scrollTop = parent.scrollHeight;
