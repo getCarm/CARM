@@ -94,14 +94,14 @@ function onMessageArrived(messageObject) {
       para.innerHTML = messageToDisplay;
   }
 
-  var brk = document.createElement('br');
+ // var brk = document.createElement('br');
   //var messageSpan = document.createElement('span');
   //messageSpan.innerHTML = messageToDisplay;
   //para.appendChild(messageSpan);
   // var node = document.createTextNode(messageToDisplay);
   // para.appendChild(node);
   parent.appendChild(para);
-  parent.appendChild(brk);
+  //parent.appendChild(brk);
   if (parent.scrollTop > parent.scrollHeight - parent.clientHeight - 70)
   {
     parent.scrollTop = parent.scrollHeight;

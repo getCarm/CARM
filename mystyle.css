@@ -92,7 +92,9 @@ color: #FF5722;
 	text-align: right;
 	float: right;
 	padding: 8px;
-	/*display:inline-block;*/
+	/*width: 200px;*/
+	display:table;
+	border-collapse: separate;
 }
 
 .card-panel.p2
@@ -100,5 +102,8 @@ color: #FF5722;
 	word-break: break-all;
 	text-align: left;
 	padding:8px;
+	/*width: 200px;*/
+	display:table;
+	border-collapse: separate;
 	/*display:inline-block;*/
 }
