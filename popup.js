@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function sendUserName(callback, divContainer, submit) {
       var username = document.getElementById('username_value').value
-      divContainer.parentNode.removeChild(submit)
+      divContainer.removeChild(submit)
       divContainer.parentNode.removeChild(divContainer)
       callback(username);
 }
@@ -44,7 +44,7 @@ function chooseUsername(callback) {
   icon.setAttribute('class', 'material-icons')
   icon.textContent = 'arrow_forward'
   
-  submit.setAttribute('class','btn-floating btn-large waves-effect waves-light red');
+  submit.setAttribute('class','btn-floating btn-small waves-effect waves-light red');
   submit.setAttribute('id', 'button_submit')
   submit.appendChild(icon)
   submit.addEventListener('click', function() {
@@ -54,8 +54,8 @@ function chooseUsername(callback) {
   divContainer.appendChild(field)
   divContainer.appendChild(label)
 
+  divContainer.appendChild(submit);
   document.getElementsByTagName('body')[0].appendChild(divContainer);
-  document.getElementsByTagName('body')[0].appendChild(submit);
 }
 
 function onConnect() {
