@@ -103,7 +103,7 @@ function onMessageArrived(messageObject) {
   // var node = document.createTextNode(messageToDisplay);
   // para.appendChild(node);
   parent.appendChild(para);
-  parent.appendChild(brk);
+  //parent.appendChild(brk);
   if (parent.scrollTop > parent.scrollHeight - parent.clientHeight - 70)
   {
     parent.scrollTop = parent.scrollHeight;
