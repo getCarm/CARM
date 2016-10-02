@@ -1,0 +1,16 @@
+body {
+	font-size: 100%;
+}
+#status {
+	/* avoid an excessively wide status text */
+	white-space: pre;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	min-width: 400px;
+	min-height: 100px;
+}
+
+#next {
+	margin: 16px;
+	float: right;
+}

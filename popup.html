@@ -1,27 +1,9 @@
-<!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="mystyle.css">
     <title>CARM</title>
-    <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
-      }
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        min-width: 400px;
-        min-height: 300px;
-      }
-    </style>
     <script src="jquery-3.1.1.js"></script>
     <script src="materialize/js/materialize.js"></script>
     <script src="mqttws31.min.js"></script>
@@ -29,10 +11,6 @@
   </head>
   <body>
     <div id="status"></div>
-    <div class="input-field">
-      <input id="username" type="text">
-      <label for="username">Username</label>
-    </div>
+    <div id="next"></div>
   </body>
 </html>
-
