@@ -11,10 +11,20 @@ document.addEventListener('DOMContentLoaded', function() {
   })
 });
 
+function sendUserName(callback, form, submit)
+{
+      var username = document.getElementById('username_value').value
+      form.parentNode.removeChild(submit)
+      form.parentNode.removeChild(form)
+      callback(username);
+}
+
 function chooseUsername(callback) {
   var form = document.createElement('form')
   var field = document.createElement('input')
   var submit = document.createElement('button')
+
+  form.setAttribute('id', 'form1');
 
   field.setAttribute('type', 'text');
   field.setAttribute('id', 'username_value')
@@ -22,20 +32,23 @@ function chooseUsername(callback) {
   submit.setAttribute('type','button');
   submit.textContent = 'Submit';
 
-  field.addEventListener('click', function()
+  submit.setAttribute('type', 'button');
+  submit.textContent = 'Submit';
+
+  form.onkeypress = function(e)
   {
-    var username = document.getElementById('username_value').value
-    form.parentNode.removeChild(submit)
-    form.parentNode.removeChild(form)
+    var key = e.charCode || e.keyCode || 0;
+    if (key == 13)
+    {
+      sendUserName(callback, form, submit);
+      e.preventDefault();
+    }
+  }
+
+  submit.addEventListener('click', function() {
+    sendUserName(callback, form, submit);
     callback(username)
   })
-
-  // submit.addEventListener('click', function() {
-  //   var username = document.getElementById('username_value').value
-  //   form.parentNode.removeChild(submit)
-  //   form.parentNode.removeChild(form)
-  //   callback(username)
-  // })
 
   form.appendChild(field)
 
