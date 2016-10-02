@@ -22,19 +22,27 @@ function sendUserName(callback, form, submit)
 function chooseUsername(callback) {
   var form = document.createElement('form')
   var field = document.createElement('input')
-  var submit = document.createElement('button')
+  var label = document.createElement('label')
+  var submit = document.createElement('a')
+  var icon = document.createElement('i')
+
+  form.setAttribute('id', 'form1');
 
   form.setAttribute('id', 'form1');
 
   field.setAttribute('type', 'text');
   field.setAttribute('id', 'username_value')
-
-  submit.setAttribute('type','button');
-  submit.textContent = 'Submit';
-
-  submit.setAttribute('type', 'button');
-  submit.textContent = 'Submit';
-
+  field.setAttribute('autocomplete', 'off')
+  
+  label.setAttribute('for', 'username_value')
+  label.textContent = 'Username'
+  
+  icon.setAttribute('class', 'material-icons')
+  icon.textContent = 'arrow_forward'
+  
+  submit.setAttribute('class','btn-floating btn-large waves-effect waves-light red');
+  submit.appendChild(icon)
+  
   form.onkeypress = function(e)
   {
     var key = e.charCode || e.keyCode || 0;
@@ -44,17 +52,16 @@ function chooseUsername(callback) {
       e.preventDefault();
     }
   }
-
   submit.addEventListener('click', function() {
     sendUserName(callback, form, submit);
   })
 
   form.appendChild(field)
+  form.appendChild(label)
 
   document.getElementsByTagName('body')[0].appendChild(form);
   document.getElementsByTagName('body')[0].appendChild(submit);
 }
-
 
 function onConnect() {
   console.log('Connected');
