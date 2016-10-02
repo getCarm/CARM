@@ -88,22 +88,21 @@ color: #FF5722;
 
 .card-panel.p1
 {
+    padding: 8px;
 	word-break: break-all;
 	text-align: right;
-	float: right;
-	padding: 8px;
-	/*width: 200px;*/
-	display:table;
-	border-collapse: separate;
+    float: right;
+    max-width: 300px;
+    margin-left: 100px;
+    margin-bottom: 2px
 }
 
 .card-panel.p2
 {
+    padding:8px;
 	word-break: break-all;
-	text-align: left;
-	padding:8px;
-	/*width: 200px;*/
-	display:table;
-	border-collapse: separate;
-	/*display:inline-block;*/
+    float: left;
+    max-width: 300px;
+    margin-right: 100px;
+    margin-bottom: 2px
 }

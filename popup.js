@@ -90,11 +90,16 @@ function onMessageArrived(messageObject) {
   }
   else
   {
-      para.setAttribute('class', 'card-panel blue-grey darken-3 p2');
+      para.setAttribute('class', 'card-panel blue-grey darken-1 p2');
       para.innerHTML = messageToDisplay;
   }
 
+<<<<<<< HEAD
  // var brk = document.createElement('br');
+=======
+  var brk = document.createElement('br');
+  brk.setAttribute('style', 'clear:both')
+>>>>>>> 6fcb0e848e0ab1d4a3db16bf3f26e8c076d67067
   //var messageSpan = document.createElement('span');
   //messageSpan.innerHTML = messageToDisplay;
   //para.appendChild(messageSpan);
@@ -210,7 +215,7 @@ function connect(u) {
 
 function renderStatus(statusText, isUrl) {
   if (isUrl)
-    document.getElementById('status').innerHTML = statusText + " to " + url + "." + '<br>' + "Happy CARMing :)";
+    document.getElementById('status').innerHTML = statusText + " to " + url + "." + '<br>' + "Happy CARMing :)" + '<br>' ;
   else
     document.getElementById('status').innerHTML = statusText;
 }
