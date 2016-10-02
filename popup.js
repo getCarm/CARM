@@ -109,7 +109,7 @@ function onMessageArrived(messageObject) {
   // para.appendChild(node);
   parent.appendChild(para);
   parent.appendChild(brk);2
-  if (parent.scrollTop > parent.scrollHeight - parent.clientHeight - 70)
+  if (parent.scrollTop > parent.scrollHeight - parent.clientHeight - 130)
   {
     parent.scrollTop = parent.scrollHeight;
     parent.animate({scrollTop: parent.scrollHeight});
