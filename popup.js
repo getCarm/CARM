@@ -81,6 +81,12 @@ function onMessageArrived(messageObject) {
   var node = document.createTextNode(messageToDisplay);
   para.appendChild(node);
   parent.appendChild(para);
+
+  if (parent.scrollTop > parent.scrollHeight - parent.clientHeight - 40)
+  {
+    parent.scrollTop = parent.scrollHeight;
+    parent.animate({scrollTop: parent.scrollHeight});
+  }
 }
 
 function onConnectionLost(responseObject) {
