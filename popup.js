@@ -13,9 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function sendUserName(callback, divContainer, submit) {
       var username = document.getElementById('username_value').value
-      divContainer.removeChild(submit)
-      divContainer.parentNode.removeChild(divContainer)
-      callback(username);
+      if (username) {
+        divContainer.removeChild(submit)
+        divContainer.parentNode.removeChild(divContainer)
+        callback(username);
+      }
 }
 
 function chooseUsername(callback) {
@@ -128,8 +130,10 @@ function getCurrentTabUrl(callback) {
 
 function makeMessage() {
     var message = document.getElementById('message').value;
-    document.getElementById('message').value = ''
-    sendMessage(message)
+    if (message) {
+      document.getElementById('message').value = ''
+      sendMessage(message)
+    }
 }
 
 function makeMessageForm () {
