@@ -66,6 +66,8 @@ function onConnect() {
     console.log('Subscribed to: ' + url);
     sendUserConnectedMessage();
   })
+
+  document.getElementById("status").style.height="340px"
   makeMessageForm()
 }
 

@@ -4,16 +4,15 @@ body {
 
 #status {
 	/* avoid an excessively wide status text */
-		white-space: pre;
+		/*white-space: pre;*/
         word-wrap: break-word;
-        overflow: hidden;
         /*min-width: 400px;
         min-height: 300px;*/
 
         width: 100%;
-        min-width: 350px;
-        max-width: 350px;
-        max-height: 700px;
+        width: 350px;
+        height: 24px;
+        overflow: auto;
 }
 
 #button_next {
