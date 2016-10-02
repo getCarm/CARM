@@ -126,11 +126,16 @@ function makeMessage() {
 
 function makeMessageForm () {
   var writeMessageDiv = document.createElement('div');
+  var messageIcon = document.createElement('i')
   var messageInput = document.createElement('input');
   var messageLabel = document.createElement('label')
-  var messageSubmit = document.createElement('input');
+  var messageSubmit = document.createElement('a')
+  var icon = document.createElement('i')
 
   writeMessageDiv.setAttribute('class', 'input-field col 6');
+
+  messageIcon.setAttribute('class', 'material-icons prefix')
+  messageIcon.textContent = 'edit'
 
   messageInput.setAttribute('type', 'text');
   messageInput.setAttribute('id', 'message');
@@ -144,19 +149,25 @@ function makeMessageForm () {
   }
   
   messageLabel.setAttribute('for', 'message')
-  messageLabel.textContent = 'Message'
+  messageLabel.textContent = 'Send Message...'
 
-  messageSubmit.setAttribute('type', 'button');
-  messageSubmit.setAttribute('value', 'Submit');
+  icon.setAttribute('class', 'material-icons')
+  icon.textContent = 'send'
+
+  
+  messageSubmit.setAttribute('class','btn-floating btn-small waves-effect waves-light red');
+  messageSubmit.setAttribute('id', 'message_submit')
+  messageSubmit.appendChild(icon)
   messageSubmit.addEventListener('click', function() {
     makeMessage();
   })
   
+  writeMessageDiv.appendChild(messageIcon);
   writeMessageDiv.appendChild(messageInput);
   writeMessageDiv.appendChild(messageLabel);
+  writeMessageDiv.appendChild(messageSubmit)
 
   document.getElementsByTagName('body')[0].appendChild(writeMessageDiv);
-  document.getElementsByTagName('body')[0].appendChild(messageSubmit);
 }
 
 function connect(u) {

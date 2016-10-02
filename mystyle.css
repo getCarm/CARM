@@ -1,5 +1,6 @@
 body {
 	font-size: 100%;
+        padding: 16px;
 }
 
 #status {
@@ -10,14 +11,14 @@ body {
         min-height: 300px;*/
 
         width: 100%;
-        width: 350px;
+        width: 375px;
         height: 24px;
         overflow: auto;
 }
 
 #button_next {
-	margin: 16px;
-	float: right;
+        margin: 16px;
+        float: right;
 }
 
 #p2
