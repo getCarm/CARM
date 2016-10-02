@@ -13,9 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function sendUserName(callback, divContainer, submit) {
       var username = document.getElementById('username_value').value
-      divContainer.removeChild(submit)
-      divContainer.parentNode.removeChild(divContainer)
-      callback(username);
+      if (username) {
+        divContainer.removeChild(submit)
+        divContainer.parentNode.removeChild(divContainer)
+        callback(username);
+      }
 }
 
 function chooseUsername(callback) {
@@ -30,6 +32,7 @@ function chooseUsername(callback) {
   field.setAttribute('type', 'text');
   field.setAttribute('id', 'username_value')
   field.setAttribute('autocomplete', 'off')
+  field.setAttribute('class', '')
   field.onkeypress = function(e) {
     var key = e.charCode || e.keyCode || 0
     if (key == 13) {
@@ -39,6 +42,7 @@ function chooseUsername(callback) {
   }
   
   label.setAttribute('for', 'username_value')
+  label.setAttribute('class', 'deep-orange-text')
   label.textContent = 'Username'
   
   icon.setAttribute('class', 'material-icons')
@@ -126,8 +130,10 @@ function getCurrentTabUrl(callback) {
 
 function makeMessage() {
     var message = document.getElementById('message').value;
-    document.getElementById('message').value = ''
-    sendMessage(message)
+    if (message) {
+      document.getElementById('message').value = ''
+      sendMessage(message)
+    }
 }
 
 function makeMessageForm () {
