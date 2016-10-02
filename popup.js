@@ -82,16 +82,27 @@ function onMessageArrived(messageObject) {
   var index = message.indexOf('|')
   var messageToDisplay = index == -1 ? message : message.substring(0, index) + ": " + message.substring(index + 1)
   var parent = document.getElementById('status');
-  var para = document.createElement("p");
+  var para = document.createElement("div");
   if (index!= -1 && message.substring(0, index) == username)
-      para.setAttribute('id', 'p1');
+  {
+      para.setAttribute('class', 'card-panel deep-orange p1');
+      para.innerHTML = message.substring(index + 1);
+  }
   else
-      para.setAttribute('id', 'p2');
-  var node = document.createTextNode(messageToDisplay);
-  para.appendChild(node);
-  parent.appendChild(para);
+  {
+      para.setAttribute('class', 'card-panel blue-grey darken-3 p2');
+      para.innerHTML = messageToDisplay;
+  }
 
-  if (parent.scrollTop > parent.scrollHeight - parent.clientHeight - 40)
+  var brk = document.createElement('br');
+  //var messageSpan = document.createElement('span');
+  //messageSpan.innerHTML = messageToDisplay;
+  //para.appendChild(messageSpan);
+  // var node = document.createTextNode(messageToDisplay);
+  // para.appendChild(node);
+  parent.appendChild(para);
+  parent.appendChild(brk);
+  if (parent.scrollTop > parent.scrollHeight - parent.clientHeight - 70)
   {
     parent.scrollTop = parent.scrollHeight;
     parent.animate({scrollTop: parent.scrollHeight});
@@ -199,7 +210,7 @@ function connect(u) {
 
 function renderStatus(statusText, isUrl) {
   if (isUrl)
-    document.getElementById('status').innerHTML = statusText + " to " + url + '<br>' + "Happy CARMing :)";
+    document.getElementById('status').innerHTML = statusText + " to " + url + "." + '<br>' + "Happy CARMing :)";
   else
     document.getElementById('status').innerHTML = statusText;
 }

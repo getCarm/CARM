@@ -23,10 +23,15 @@ body {
         float: right;
 }
 
-#p2
+/*#p2
 {
 	word-break: break-all;
 	white-space: normal;
+}
+
+#p2 span
+{
+	background-color: #DEE1E5;
 }
 
 #p1
@@ -35,6 +40,11 @@ body {
 	white-space: normal;
 	text-align: right;
 }
+
+#p2 span
+{
+	background-color: #FF5722;
+}*/
 
 #message_submit
 {
@@ -74,4 +84,21 @@ box-shadow: 0 1px 0 0 #FF5722;
 /* icon prefix focus color */
 .input-field .prefix.active {
 color: #FF5722;
+}
+
+.card-panel.p1
+{
+	word-break: break-all;
+	text-align: right;
+	float: right;
+	padding: 8px;
+	/*display:inline-block;*/
+}
+
+.card-panel.p2
+{
+	word-break: break-all;
+	text-align: left;
+	padding:8px;
+	/*display:inline-block;*/
 }
