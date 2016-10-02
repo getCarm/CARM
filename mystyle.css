@@ -26,3 +26,9 @@ body {
 	word-break: break-all;
 	white-space: normal;
 }
+
+#message_submit
+{
+	position:absolute;
+	right: 10px;
+}
