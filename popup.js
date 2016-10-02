@@ -25,8 +25,6 @@ function chooseUsername(callback) {
   var submit = document.createElement('a')
   var icon = document.createElement('i')
 
-  form.setAttribute('id', 'form1');
-
   field.setAttribute('type', 'text');
   field.setAttribute('id', 'username_value')
   field.setAttribute('autocomplete', 'off')
@@ -67,6 +65,8 @@ function onConnect() {
     console.log('Subscribed to: ' + url);
     sendUserConnectedMessage();
   })
+
+  document.getElementById("status").style.height="340px"
   makeMessageForm()
 }
 
