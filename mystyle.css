@@ -89,8 +89,8 @@ color: #FF5722;
 .card-panel.p1
 {
     padding: 8px;
-	word-break: break-all;
-	text-align: right;
+    word-break: break-all;
+    text-align: right;
     float: right;
     max-width: 300px;
     margin-left: 100px;
