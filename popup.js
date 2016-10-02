@@ -27,9 +27,7 @@ function chooseUsername(callback) {
   var icon = document.createElement('i')
 
   form.setAttribute('id', 'form1');
-
-  form.setAttribute('id', 'form1');
-
+  
   field.setAttribute('type', 'text');
   field.setAttribute('id', 'username_value')
   field.setAttribute('autocomplete', 'off')
@@ -81,8 +79,7 @@ function onMessageArrived(messageObject) {
   var messageToDisplay = index == -1 ? message : message.substring(0, index) + ": " + message.substring(index + 1)
   var parent = document.getElementById('status');
   var para = document.createElement("p");
-  //para.setAttribute('id', 'p2');
-  //document.getElementById("p2").style.word\-break = "break-all";
+  para.setAttribute('id', 'p2');
   var node = document.createTextNode(messageToDisplay);
   para.appendChild(node);
   parent.appendChild(para);

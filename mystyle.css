@@ -1,6 +1,7 @@
 body {
 	font-size: 100%;
 }
+
 #status {
 	/* avoid an excessively wide status text */
 		white-space: pre;
@@ -10,12 +11,18 @@ body {
         min-height: 300px;*/
 
         width: 100%;
-        min-height: 20px;
-        max-width: 300px;
-        max-height: 600px;
+        min-width: 350px;
+        max-width: 350px;
+        max-height: 700px;
 }
 
 #next {
 	margin: 16px;
 	float: right;
+}
+
+#p2
+{
+	word-break: break-all;
+	white-space: normal;
 }
