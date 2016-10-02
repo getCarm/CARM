@@ -47,7 +47,6 @@ function chooseUsername(callback) {
 
   submit.addEventListener('click', function() {
     sendUserName(callback, form, submit);
-    callback(username)
   })
 
   form.appendChild(field)
@@ -75,6 +74,8 @@ function onMessageArrived(messageObject) {
   var messageToDisplay = index == -1 ? message : message.substring(0, index) + ": " + message.substring(index + 1)
   var parent = document.getElementById('status');
   var para = document.createElement("p");
+  //para.setAttribute('id', 'p2');
+  //document.getElementById("p2").style.word\-break = "break-all";
   var node = document.createTextNode(messageToDisplay);
   para.appendChild(node);
   parent.appendChild(para);
