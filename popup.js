@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })
 });
 
-function sendUserName(callback, form, submit)
-{
+function sendUserName(callback, form, submit) {
       var username = document.getElementById('username_value').value
       form.parentNode.removeChild(submit)
       form.parentNode.removeChild(form)
@@ -25,8 +24,6 @@ function chooseUsername(callback) {
   var label = document.createElement('label')
   var submit = document.createElement('a')
   var icon = document.createElement('i')
-
-  form.setAttribute('id', 'form1');
 
   form.setAttribute('id', 'form1');
 
@@ -43,15 +40,14 @@ function chooseUsername(callback) {
   submit.setAttribute('class','btn-floating btn-large waves-effect waves-light red');
   submit.appendChild(icon)
   
-  form.onkeypress = function(e)
-  {
+  form.onkeypress = function(e) {
     var key = e.charCode || e.keyCode || 0;
-    if (key == 13)
-    {
+    if (key == 13) {
       sendUserName(callback, form, submit);
       e.preventDefault();
     }
   }
+  
   submit.addEventListener('click', function() {
     sendUserName(callback, form, submit);
   })
@@ -81,8 +77,7 @@ function onMessageArrived(messageObject) {
   var messageToDisplay = index == -1 ? message : message.substring(0, index) + ": " + message.substring(index + 1)
   var parent = document.getElementById('status');
   var para = document.createElement("p");
-  //para.setAttribute('id', 'p2');
-  //document.getElementById("p2").style.word\-break = "break-all";
+  para.setAttribute('id', 'p2');
   var node = document.createTextNode(messageToDisplay);
   para.appendChild(node);
   parent.appendChild(para);
@@ -122,8 +117,7 @@ function getCurrentTabUrl(callback) {
   });
 }
 
-function makeMessage()
-{
+function makeMessage() {
     var message = document.getElementById('message').value;
     document.getElementById('form').reset();
     sendMessage(message)
@@ -143,11 +137,9 @@ function makeMessageForm () {
   messageSubmit.setAttribute('type', 'button');
   messageSubmit.setAttribute('value', 'Submit');
 
-  writeMessageForm.onkeypress = function(e)
-  {
+  writeMessageForm.onkeypress = function(e) {
     var key = e.charCode || e.keyCode || 0;
-    if (key == 13)
-    {
+    if (key == 13) {
       makeMessage();
       e.preventDefault();
     }
