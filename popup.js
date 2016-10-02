@@ -94,12 +94,8 @@ function onMessageArrived(messageObject) {
       para.innerHTML = messageToDisplay;
   }
 
-<<<<<<< HEAD
- // var brk = document.createElement('br');
-=======
   var brk = document.createElement('br');
   brk.setAttribute('style', 'clear:both')
->>>>>>> 6fcb0e848e0ab1d4a3db16bf3f26e8c076d67067
   //var messageSpan = document.createElement('span');
   //messageSpan.innerHTML = messageToDisplay;
   //para.appendChild(messageSpan);
