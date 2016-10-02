@@ -30,6 +30,7 @@ function chooseUsername(callback) {
   field.setAttribute('type', 'text');
   field.setAttribute('id', 'username_value')
   field.setAttribute('autocomplete', 'off')
+  field.setAttribute('class', '')
   field.onkeypress = function(e) {
     var key = e.charCode || e.keyCode || 0
     if (key == 13) {
@@ -39,12 +40,13 @@ function chooseUsername(callback) {
   }
   
   label.setAttribute('for', 'username_value')
+  label.setAttribute('class', 'deep-orange-text')
   label.textContent = 'Username'
   
   icon.setAttribute('class', 'material-icons')
   icon.textContent = 'arrow_forward'
   
-  submit.setAttribute('class','btn-floating btn-small waves-effect waves-light red');
+  submit.setAttribute('class','btn-floating btn-small waves-effect waves-light deep-orange');
   submit.setAttribute('id', 'button_submit')
   submit.appendChild(icon)
   submit.addEventListener('click', function() {
