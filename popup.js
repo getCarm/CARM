@@ -167,7 +167,7 @@ function makeMessageForm () {
   icon.textContent = 'send'
 
   
-  messageSubmit.setAttribute('class','btn-floating btn-small waves-effect waves-light red');
+  messageSubmit.setAttribute('class','btn-floating btn-small waves-effect waves-light deep-orange');
   messageSubmit.setAttribute('id', 'message_submit')
   messageSubmit.appendChild(icon)
   messageSubmit.addEventListener('click', function() {
