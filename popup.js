@@ -6,7 +6,7 @@ var port = 8000
 document.addEventListener('DOMContentLoaded', function() {
   renderStatus('Please pick a username')
   chooseUsername(function(username) {
-    renderStatus('Connecting')
+    renderStatus('Connecting', false)
     connect(username)
   })
 });
@@ -68,6 +68,7 @@ function onConnect() {
     url = u;
     client.subscribe(url);
     console.log('Subscribed to: ' + url);
+    renderStatus('Connected', true)
     sendUserConnectedMessage();
   })
 
@@ -123,7 +124,7 @@ function getCurrentTabUrl(callback) {
 
   chrome.tabs.query(queryInfo, function(tabs) {
     var tab = tabs[0];
-    var url = tab.url;
+    url = tab.url;
     callback(url);
   });
 }
@@ -193,6 +194,9 @@ function connect(u) {
   client.connect({onSuccess:onConnect}); //Connect
 }
 
-function renderStatus(statusText) {
-  document.getElementById('status').textContent = statusText;
+function renderStatus(statusText, isUrl) {
+  if (isUrl)
+    document.getElementById('status').innerHTML = statusText + " to " + url + '<br>' + "Happy CARMing :)";
+  else
+    document.getElementById('status').innerHTML = statusText;
 }
