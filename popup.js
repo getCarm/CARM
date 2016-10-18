@@ -1,8 +1,8 @@
 var url = '' //Global URL variable
 var hashed_url = ''
 var username = ''
-var host = 'broker.hivemq.com'
-var port = 8000
+var host = 'iot.eclipse.org'
+var port = 80
 
 document.addEventListener('DOMContentLoaded', function() {
   renderStatus('Please pick a username')
