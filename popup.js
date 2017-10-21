@@ -1,10 +1,11 @@
 var url = '' //Global URL variable
 var hashed_url = ''
 var username = ''
-var host = 'iot.eclipse.org'
-var port = 80
+var host = 'broker.mqttdashboard.com'
+var port = 8000
 
 document.addEventListener('DOMContentLoaded', function() {
+	console.log("DOMContentLoaded")
   renderStatus('Please pick a username')
   chooseUsername(function(username) {
     renderStatus('Connecting', false)
