@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "CARM",
-  "version": "1.2",
+  "version": "1.4",
   "description": "Communicate Among Random Masses",
   "icons": { 
     "16":"icon.png", 

