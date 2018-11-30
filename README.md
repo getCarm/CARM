@@ -1,11 +1,12 @@
-#CARM
-C ommunicate
+# CARM
 
-A mong
+**C** ommunicate
 
-R andom
+**A** mong
 
-M asses
+**R** andom
+
+**M** asses
 
 CARM is an extension for Chrome that allows you to talk to people browsing the same website that you are
 
